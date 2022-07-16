@@ -192,23 +192,12 @@ async function eliminarSubTarea(id) {
     let options = {
         method: "DELETE",
         
-    mostrarList()
-}
+        mostrarList()
+    }
 /**
  * Editar sub lista 
  * @param {*} id1 
  * @param {*} id2 
  * @param {*} nombre 
  */
-
-
-
-
-
-
-
-
-
-
-
-
+}
