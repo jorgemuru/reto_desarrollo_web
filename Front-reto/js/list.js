@@ -4,32 +4,35 @@ const d = document,
     $crear = d.getElementById("crear"),
     body = d.querySelector('.tbody1'),
     $input = d.getElementById('inputTarea').value
-const url = '';
+const url = 'http://localhost:8080';
 let resultado = ''
 let resultadoSub = ''
 let subtarea = {};
 
 
-//funcon boton crear , permite guardar en el input el nombre de la nueva lista a crear
+//funcion boton crear, permite guardar en el input el nombre de la nueva lista a crear
 $crear.addEventListener('click', e => {
     e.preventDefault();
-    crearList(d.getElementById('inputTarea').value)
-
+    crearList(d.getElementById('inputTarea').value);
+    e.path[1].querySelector("#inputTarea").value = "";
 })
+
 //Funcion crear lista , consulta la ruta del fetch y realiza el metodo post con los datos 
 async function crearList(lista) {
     if (lista) {
         let options = {
             method: "POST",
-            
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
             body: JSON.stringify({
                 name: lista
             })
         },
             res = await fetch(`${url}/task`, options)
-        mostrarList();
+            mostrarList();
     } else {
-        alert("ingrese una tarea por favor!")
+        alert("Ingrese una tarea por favor!")
     }
 }
 
@@ -88,12 +91,12 @@ const mostrar = (listas) => {
         </div>
         `
     })
-    document.querySelector('.tbody1').innerHTML = resultado;
+    d.querySelector('.tbody1').innerHTML = resultado;
     resultado = "";
 }
 
 
-body.addEventListener("click", (e) => {
+d.addEventListener("click", (e) => {
     console.log(e.target.parentElement.parentElement.id);
     if (e.target.classList[0] == "EliminarTarea") {
         eliminarTarea(e.target.parentElement.parentElement.id)
@@ -192,7 +195,7 @@ async function eliminarSubTarea(id) {
     let options = {
         method: "DELETE",
         
-        mostrarList()
+        //mostrarList()
     }
 /**
  * Editar sub lista 
