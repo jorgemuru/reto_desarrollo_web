@@ -3,19 +3,19 @@ package com.sofka.Software.controller;
 import com.sofka.Software.models.ListModel;
 import com.sofka.Software.services.ListService;
 //import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:8080", "http://127.0.0.1:8080/"})
 @RestController
 public class ListController {
         @Autowired
         private ListService listRepository;
 
         @GetMapping(value = "/listas")
-        public Iterable<ListModel> list(){
+        public Iterable<ListModel> list() {
             return listRepository.list();
         }
 
@@ -25,7 +25,7 @@ public class ListController {
         }
 
          @DeleteMapping(value = "/task/{id}")
-         public void deleteTask(@PathVariable("id")Long id){
-         listRepository.deleteTask(id);
+         public void deleteTask(@PathVariable("id")Long id) {
+            listRepository.deleteTask(id);
          }
-}
+}//fin clase

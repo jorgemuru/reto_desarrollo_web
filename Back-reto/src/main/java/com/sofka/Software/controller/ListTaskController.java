@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:8080","http://127.0.0.1:8080/"})
 @RestController
 public class ListTaskController {
     @Autowired
@@ -39,4 +39,4 @@ public class ListTaskController {
     // public void deletelistTask(@PathVariable("id")Long id){
        // listTaskService.deleteListTask(id);
     //}
-//}
+}//fin clase
