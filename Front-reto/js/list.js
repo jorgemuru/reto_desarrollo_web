@@ -11,11 +11,12 @@ let subtarea = {};
 
 
 //funcion boton crear, permite guardar en el input el nombre de la nueva lista a crear
-$crear.addEventListener('click', e => {
+$crear.addEventListener('click', async (e) => {
     e.preventDefault();
-    crearList(d.getElementById('inputTarea').value);
-    e.path[1].querySelector("#inputTarea").value = "";
-})
+    await crearList(d.getElementById('inputTarea').value);
+    await mostrarList();
+    d.getElementById('inputTarea').value = "";
+});
 
 //Funcion crear lista , consulta la ruta del fetch y realiza el metodo post con los datos 
 async function crearList(lista) {
@@ -39,16 +40,13 @@ async function crearList(lista) {
 //muestra las listas en la BD
 async function mostrarList() {
     let res = await fetch(`${url}/listas`)
-    let data = await res.json()
-        .catch(error => console.log(error))
+    let data = await res.json().catch(error => console.log(error))
     mostrar(data)
-    
 }
 mostrarList()
 
 //Muesta la lista creada mediante 2 busquedas para mostra
 const mostrar = (listas) => {
-
     listas.forEach(lista => {
         resultadoSub = ''
         lista.listTask.forEach(sub => {
@@ -80,7 +78,7 @@ const mostrar = (listas) => {
                     <tr>
                     <th>ID</th>
                     <th>Tarea</th>
-                    <th>¿completado?</th>
+                    <th>¿Completado?</th>
                     <th>Opciones</th>
                     </tr>
                 </thead>
@@ -150,9 +148,6 @@ d.addEventListener("click", (e) => {
         }
 
     }
-
-
-
 })
 
 //funcion eliminar , recibe como parametro el ID
